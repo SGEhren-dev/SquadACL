@@ -9,12 +9,21 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+const OrganizationsController = () => import('#controllers/organizations_controller')
+const ServerGroupsController = () => import('#controllers/server_groups_controller')
 const ServersController = () => import('#controllers/servers_controller')
 const AuthenticationController = () => import('#controllers/authentication_controller')
 
 router
   .group(function () {
     router.resource('server', ServersController).apiOnly()
+    router.resource('organization', OrganizationsController).apiOnly()
+
+    router
+      .group(function () {
+        router.resource('group', ServerGroupsController).apiOnly()
+      })
+      .prefix('server/:serverId')
   })
   .prefix('api')
   .middleware(middleware.auth({ guards: ['api'] }))
@@ -27,6 +36,6 @@ router
   .prefix('api/auth')
   .as('auth')
 
-router.any('*', async ({ view }) => {
+router.get('*', async ({ view }) => {
   return view.render('welcome')
 })

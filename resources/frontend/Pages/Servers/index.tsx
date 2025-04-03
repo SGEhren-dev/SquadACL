@@ -1,9 +1,10 @@
+import PageLayout from "@/Components/PageLayout/index.jsx";
 import { memo } from "react";
 
 export default memo(function Servers() {
 	return (
-		<div className="servers-page">
+		<PageLayout title="Servers" subTitle="View your servers." icon="server">
 			<h1>Servers</h1>
-		</div>
+		</PageLayout>
 	);
 });
