@@ -1,9 +1,9 @@
-import { logoutUserAction, selectUser } from "@/Data/Redux/Slices/User.js";
-import { useAppDispatch, useAppSelector } from "@/Data/Redux/Store.js";
+import { logoutUserAction, selectUser } from "@/Data/Redux/Slices/User";
+import { useAppDispatch, useAppSelector } from "@/Data/Redux/Store";
 import { Menu, Text, UnstyledButton } from "@mantine/core";
 import { memo } from "react";
 import { useNavigate } from "react-router-dom";
-import Icon from "@/Components/Icon/index.jsx";
+import Icon from "@/Components/Icon/index";
 
 export default memo(function UserContextMenu() {
 	const navigate = useNavigate();

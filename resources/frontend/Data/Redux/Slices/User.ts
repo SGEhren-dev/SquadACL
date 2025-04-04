@@ -1,6 +1,6 @@
-import { ILoginUserPayload, IUser, IUserState } from "@/Data/Interfaces/User.js";
-import { POST } from "@/Data/Network.js";
-import { createAppSlice } from "@/Data/Redux/Helpers.js";
+import { ILoginUserPayload, IUser, IUserState } from "@/Data/Interfaces/User";
+import { POST } from "@/Data/Network";
+import { createAppSlice } from "@/Data/Redux/Helpers";
 import { PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: IUserState = {

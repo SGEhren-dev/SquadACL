@@ -1,12 +1,12 @@
 import { memo, StrictMode } from "react";
-import { IWithChildren } from "@/Data/Interfaces/Global.js";
+import { IWithChildren } from "@/Data/Interfaces/Global";
 import { MantineProvider } from "@mantine/core";
-import { baseTheme } from "@/Data/Utils/Theme.js";
+import { baseTheme } from "@/Data/Utils/Theme";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { store } from "@/Data/Redux/Store.js";
+import { store } from "@/Data/Redux/Store";
 import { PersistGate } from "redux-persist/integration/react";
-import { persistor } from "@/Data/Redux/Persist.js";
+import { persistor } from "@/Data/Redux/Persist";
 
 export default memo(function ContextProvider({ children }: IWithChildren) {
 	return (

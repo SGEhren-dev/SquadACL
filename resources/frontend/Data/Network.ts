@@ -1,6 +1,6 @@
-import { IPaginatedRequestParams } from "@/Data/Interfaces/Global.js";
-import { baseUrl } from "@/Data/System.js";
-import { store } from "@/Data/Redux/Store.js";
+import { IPaginatedRequestParams } from "@/Data/Interfaces/Global";
+import { baseUrl } from "@/Data/System";
+import { store } from "@/Data/Redux/Store";
 
 type RequestType = "DELETE" | "GET" | "POST" | "PATCH";
 
@@ -29,43 +29,37 @@ export function DELETE<T, ReturnType = void>(path: string, body?: T) {
 	return request<ReturnType>(path, "DELETE", JSON.stringify(body), undefined);
 }
 
-function request<ReturnType>(path: string, method: RequestType, body?: string, headers?: { [key: string]: string }) {
+async function request<ReturnType>(path: string, method: RequestType, body?: string, headers?: { [key: string]: string }) {
 	const url = `${ baseUrl }/api/${ path }`;
 	const authToken = store.getState().userSlice.user?.token?.token;
 	const authHeaders = { "Authorization": `Bearer ${ authToken }` };
 
-	return new Promise<ReturnType>((resolve, reject) => {
-		return fetch(url, {
+	try {
+		const response: Response = await fetch(url, {
 			body,
 			headers: { ...baseHeaders, ...authHeaders, ...headers },
 			method,
 			mode: "cors"
-		})
-			.then((response: Response) => {
-				const { status } = response;
+		});
 
-				if (status >= 200 && status < 300) {
-					if (status === 204) {
-						return resolve({} as ReturnType);
-					}
+		const { status } = response;
 
-					resolve(response.json());
-				} else if (status >= 400 && status < 500) {
-					if (status === 401) {
-						reject();
-					}
+		if (status >= 200 && status < 300) {
+			return status === 204
+				? {} as ReturnType
+				: await response.json();
+		} else if (status >= 400 && status < 500) {
+			if (status === 401)  {
+				throw new Error("Unauthorized.");
+			}
 
-					reject();
-				} else if (status >= 500 && status < 600) {
-					reject();
-				}
-			}, () => {
-				reject();
-			})
-			.catch(() => {
-				reject();
-			});
-	});
+			throw new Error(`Client Error: ${ status }`);
+		} else {
+			throw new Error(`Server Error: ${ status }`);
+		}
+	} catch (error) {
+		throw new Error(error);
+	}
 }
 
 const uriEncodeParameters = (params: IPaginatedRequestParams) => {

@@ -1,6 +1,6 @@
-import { IOrganizationState, IOrganization } from "@/Data/Interfaces/Organization.js";
-import { DELETE, GET, PATCH, POST } from "@/Data/Network.js";
-import { createAppSlice } from "@/Data/Redux/Helpers.js";
+import { IOrganizationState, IOrganization } from "@/Data/Interfaces/Organization";
+import { DELETE, GET, PATCH, POST } from "@/Data/Network";
+import { createAppSlice } from "@/Data/Redux/Helpers";
 import { PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: IOrganizationState = {
@@ -8,19 +8,19 @@ const initialState: IOrganizationState = {
 };
 
 const createOrganizationAsync = (payload: Partial<IOrganization>) => {
-	return POST<Partial<IOrganization>, IOrganization>("server", payload);
+	return POST<Partial<IOrganization>, IOrganization>("organization", payload);
 };
 
 const fetchOrganizationsAsync = () => {
-	return GET<IOrganization[]>("server");
+	return GET<IOrganization[]>("organization");
 };
 
 const updateOrganizationAsync = (payload: IOrganization) => {
-	return PATCH<IOrganization, IOrganization>(`server/${ payload.id }`, payload);
+	return PATCH<IOrganization, IOrganization>(`organization/${ payload.id }`, payload);
 };
 
 const deleteOrganizationAsync = (payload: number) => {
-	return DELETE(`server/${ payload }`)
+	return DELETE(`organization/${ payload }`)
 		.then(() => payload);
 };
 
@@ -54,7 +54,7 @@ const deleteOrganizationReducer = (state: IOrganizationState, action: PayloadAct
 };
 
 const getOrganizationById = (state: IOrganizationState, id: number) => {
-	return state.organizations.find(org => org.id = id);
+	return state.organizations.find(org => org.id === id);
 };
 
 const getOrganizations = (state: IOrganizationState) => state.organizations;

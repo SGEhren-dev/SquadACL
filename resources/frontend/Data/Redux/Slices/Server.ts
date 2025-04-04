@@ -1,6 +1,6 @@
-import { IServer, IServerState } from "@/Data/Interfaces/Server.js";
-import { DELETE, GET, PATCH, POST } from "@/Data/Network.js";
-import { createAppSlice } from "@/Data/Redux/Helpers.js";
+import { IServer, IServerState } from "@/Data/Interfaces/Server";
+import { DELETE, GET, PATCH, POST } from "@/Data/Network";
+import { createAppSlice } from "@/Data/Redux/Helpers";
 import { PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: IServerState = {

@@ -1,5 +1,6 @@
 import { createTheme } from "@mantine/core";
 
 export const baseTheme = createTheme({
-	fontFamily: "Roboto"
+	fontFamily: "Roboto",
+	primaryColor: "teal"
 });

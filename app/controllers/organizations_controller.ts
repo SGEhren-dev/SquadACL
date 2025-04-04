@@ -22,7 +22,7 @@ export default class OrganizationsController {
     const owningUser = await User.findOrFail(owner)
     const newOrganization = await Organization.create(restProps)
 
-    await newOrganization.related('owner').associate(owningUser)
+    await owningUser.related('organizations').save(newOrganization)
 
     return new OrganizationResource(newOrganization).make()
   }
@@ -43,16 +43,16 @@ export default class OrganizationsController {
   async update({ params, request }: HttpContext) {
     const { owner, ...restProps } = await organizationValidator.validate(request.all())
     const foundOrganization = await Organization.query()
-      .preload('owner')
+      .preload('user')
       .where('id', params['id'])
       .firstOrFail()
 
     foundOrganization.merge(restProps)
 
-    if (foundOrganization.owner.id !== owner) {
-      const newOwner = await User.findOrFail(owner)
+    if (foundOrganization.user.id !== owner) {
+      const newUser = await User.findOrFail(owner)
 
-      await foundOrganization.related('owner').associate(newOwner)
+      await newUser.related('organizations').save(foundOrganization)
     }
 
     return new OrganizationResource(foundOrganization).make()

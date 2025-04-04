@@ -10,3 +10,7 @@ export interface IPaginatedRequestParams {
 }
 
 export type Nullable<Type> = Type | null;
+
+export interface IWithId {
+	id: number;
+}

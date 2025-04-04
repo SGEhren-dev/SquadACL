@@ -1,16 +1,16 @@
 import { memo } from "react";
-import Home from "@/Pages/Home/index.jsx";
-import Login from "@/Pages/Login/index.jsx";
+import Home from "@/Pages/Home/index";
+import Login from "@/Pages/Login/index";
 import { Route, Routes } from "react-router-dom";
-import PrivateRoute from "@/Components/PrivateRoute.jsx";
-import Servers from "@/Pages/Servers/index.jsx";
+import PrivateRoute from "@/Components/PrivateRoute";
+import Servers from "@/Pages/Servers/index";
+import Organizations from "@/Pages/Organizations/index";
+import EditOrganization from "@/Pages/Organizations/EditOrganization";
 
 export default memo(function Router() {
 	const mainLayout = (
 		<PrivateRoute>
-			<div className="app-window">
-				<Home />
-			</div>
+			<Home />
 		</PrivateRoute>
 	);
 
@@ -18,6 +18,8 @@ export default memo(function Router() {
 		<Routes>
 			<Route path="/" element={ mainLayout }>
 				<Route index element={ <h1>Home</h1> } />
+				<Route path="organizations" element={ <Organizations /> } />
+				<Route path="organizations/:orgId" element={ <EditOrganization /> } />
 				<Route path="servers" element={ <Servers /> } />
 				<Route path="whitelist" element={ <h1>Whitelist</h1> } />
 				<Route path="users" element={ <h1>Users</h1> } />

@@ -6,6 +6,8 @@ export default class OrganizationResource extends BaseResource<Organization> {
     return {
       id: this.resource.id,
       name: this.resource.name,
+      owner: this.resource.getOwnerId(),
+      maxSlots: this.resource.maxSlots,
     }
   }
 }

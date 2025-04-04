@@ -9,6 +9,7 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+const WhitelistsController = () => import('#controllers/whitelists_controller')
 const OrganizationsController = () => import('#controllers/organizations_controller')
 const ServerGroupsController = () => import('#controllers/server_groups_controller')
 const ServersController = () => import('#controllers/servers_controller')
@@ -18,6 +19,12 @@ router
   .group(function () {
     router.resource('server', ServersController).apiOnly()
     router.resource('organization', OrganizationsController).apiOnly()
+
+    router
+      .group(function () {
+        router.resource('whitelists', WhitelistsController).apiOnly()
+      })
+      .prefix('organization/:orgId')
 
     router
       .group(function () {

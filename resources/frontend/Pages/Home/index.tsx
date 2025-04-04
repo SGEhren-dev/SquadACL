@@ -1,10 +1,11 @@
 import { memo } from "react";
 import "@/Pages/Home/Home.less";
 import { Outlet, useMatch, useNavigate } from "react-router-dom";
-import { Category } from "@/Data/Interfaces/Navigation.js";
-import Icon, { IconWeight } from "@/Components/Icon/index.jsx";
-import { AppShell, Flex, Group, Text, Tooltip, UnstyledButton } from "@mantine/core";
-import UserContextMenu from "@/Components/UserContextMenu/index.jsx";
+import { Category } from "@/Data/Interfaces/Navigation";
+import Icon, { IconWeight } from "@/Components/Icon/index";
+import { AppShell, Flex, Group, Image, Text, Tooltip, UnstyledButton } from "@mantine/core";
+import UserContextMenu from "@/Components/UserContextMenu/index";
+import AclLogo from "../../Images/squadacl-logo.png";
 
 interface ICategoryItem {
 	icon: string;
@@ -17,6 +18,11 @@ const iconMap: Record<Category, ICategoryItem> = {
 		icon: "gauge",
 		label: "Dashboard",
 		route: ""
+	},
+	[ Category.ORGANIZATIONS ]: {
+		icon: "building",
+		label: "Organizations",
+		route: "/organizations"
 	},
 	[ Category.SERVERS ]: {
 		icon: "server",
@@ -74,9 +80,9 @@ export default memo(function Home() {
 		<AppShell header={ { height: 60 } } navbar={ { width: 74, breakpoint: "sm" } } padding="lg">
 			<AppShell.Header className="sacl-shell-header">
 				<Group flex={ 1 } px="md">
-					<Flex flex={ 3 }>
-						<Text size="xl" fw={ 700 }>SquadACL</Text>
-					</Flex>
+					<Group>
+						<Image src={ AclLogo } alt="squadacl" height={ 48 } width={ 48 } />
+					</Group>
 					<Flex ml="auto" justify="flex-end" gap="md" align="center">
 						<UserContextMenu />
 					</Flex>

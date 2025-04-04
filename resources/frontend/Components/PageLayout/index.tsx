@@ -1,15 +1,16 @@
 import { Group, Stack, Text, ThemeIcon, Title } from "@mantine/core";
-import { memo } from "react";
-import Icon from "../Icon/index.jsx";
-import { IWithChildren } from "@/Data/Interfaces/Global.js";
+import { memo, ReactNode } from "react";
+import Icon from "@/Components/Icon/index";
+import { IWithChildren } from "@/Data/Interfaces/Global";
 
 interface IPageLayoutProps extends IWithChildren {
 	title: string;
 	subTitle: string;
 	icon: string;
+	titleRightContent?: ReactNode;
 }
 
-export default memo(function PageLayout({ title, subTitle, icon, children }: IPageLayoutProps) {
+export default memo(function PageLayout({ title, subTitle, icon, children, titleRightContent }: IPageLayoutProps) {
 	return (
 		<Stack align="center" mx="lg">
 			<Group h={ 90 } w="100%">
@@ -18,12 +19,15 @@ export default memo(function PageLayout({ title, subTitle, icon, children }: IPa
 				</ThemeIcon>
 				<Stack align="flex-start" gap={ 0 }>
 					<Title fw={ 700 }>{ title }</Title>
-					<Text size="xs" c="#D3D3D3">{ subTitle }</Text>
+					<Text size="xs" c="#D3D3D3" ml={ 10 }>{ subTitle }</Text>
+				</Stack>
+				<Stack ml="auto">
+					{ titleRightContent }
 				</Stack>
 			</Group>
-			<Group justify="center" w="75%">
+			<Stack justify="center" w="75%" py="xl">
 				{ children }
-			</Group>
+			</Stack>
 		</Stack>
 	);
 });

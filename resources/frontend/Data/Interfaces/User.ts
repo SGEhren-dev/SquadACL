@@ -8,6 +8,7 @@ export interface ITokenInformation {
 }
 
 export interface IUser {
+	id: number;
 	email: string;
 	token: ITokenInformation;
 }

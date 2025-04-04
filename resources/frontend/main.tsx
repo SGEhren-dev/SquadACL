@@ -1,8 +1,8 @@
 import "@/Styles/index.less";
-import Router from "@/Components/Router.jsx";
+import Router from "@/Components/Router";
 import { createRoot } from "react-dom/client";
-import { initFontAwesome } from "@/FontAwesome.js";
-import ContextProvider from "@/Components/ContextProvider.jsx";
+import { initFontAwesome } from "@/FontAwesome";
+import ContextProvider from "@/Components/ContextProvider";
 
 initFontAwesome();
 

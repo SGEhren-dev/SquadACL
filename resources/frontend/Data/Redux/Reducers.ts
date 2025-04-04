@@ -1,9 +1,10 @@
 
 import { combineSlices } from "@reduxjs/toolkit";
-import userSlice from "@/Data/Redux/Slices/User.js";
-import serversSlice from "@/Data/Redux/Slices/Server.js";
-import organizationsSlice from "@/Data/Redux/Slices/Organization.js";
+import userSlice from "@/Data/Redux/Slices/User";
+import serversSlice from "@/Data/Redux/Slices/Server";
+import organizationsSlice from "@/Data/Redux/Slices/Organization";
+import whitelistSlice from "@/Data/Redux/Slices/Whitelist";
 
-export const rootReducer = combineSlices(userSlice, serversSlice, organizationsSlice);
+export const rootReducer = combineSlices(userSlice, serversSlice, organizationsSlice, whitelistSlice);
 
 export type AppState = ReturnType<typeof rootReducer>;
