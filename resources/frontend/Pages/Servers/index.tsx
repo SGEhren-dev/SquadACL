@@ -1,4 +1,4 @@
-import PageLayout from "@/Components/PageLayout/index";
+import PageLayout from "@/Components/PageLayout";
 import { memo } from "react";
 
 export default memo(function Servers() {

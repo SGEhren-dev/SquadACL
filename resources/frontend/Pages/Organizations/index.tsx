@@ -1,14 +1,16 @@
-import Icon, { IconSize } from "@/Components/Icon/index";
+import Icon, { IconSize } from "@/Components/Icon";
 import OrganizationCard from "@/Components/Organizations/OrganizationCard";
 import OrganizationModal from "@/Components/Organizations/OrganizationModal";
-import PageLayout from "@/Components/PageLayout/index";
+import PageLayout from "@/Components/PageLayout";
 import { fetchOrganizationsAction, selectOrganizations } from "@/Data/Redux/Slices/Organization";
+import { selectWhitelists } from "@/Data/Redux/Slices/Whitelist";
 import { useAppDispatch, useAppSelector } from "@/Data/Redux/Store";
 import { Grid, Stack, Text } from "@mantine/core";
 import { memo, useEffect } from "react";
 
 export default memo(function Organizations() {
 	const dispatch = useAppDispatch();
+	const whitelist = useAppSelector(selectWhitelists);
 	const organizations = useAppSelector(selectOrganizations);
 	const noOrgsContent = (
 		<Stack align="center">
@@ -26,7 +28,7 @@ export default memo(function Organizations() {
 			<Grid w="100%">
 				{ organizations.map(org => (
 					<Grid.Col span={ 4 }>
-						<OrganizationCard organization={ org } />
+						<OrganizationCard organization={ org } whitelistCount={ whitelist.length } />
 					</Grid.Col>
 				))}
 			</Grid>

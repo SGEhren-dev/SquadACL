@@ -1,13 +1,13 @@
 import { IWhitelist } from "@/Data/Interfaces/Whitelist";
 import { memo, useState } from "react";
 import { useDisclosure } from "@mantine/hooks";
-import { Button, Modal, Switch, TextInput } from "@mantine/core";
+import { Button, Modal, Switch, TextInput, ThemeIcon } from "@mantine/core";
 import { DatePickerInput, DateValue } from "@mantine/dates";
 import { useForm } from "@mantine/form";
 import { useAppDispatch } from "@/Data/Redux/Store";
 import { createWhitelistAction, updateWhitelistAction } from "@/Data/Redux/Slices/Whitelist";
 import { produce } from "immer";
-import Icon from "@/Components/Icon/index";
+import Icon from "@/Components/Icon";
 
 interface IWhitelistModalProps {
 	orgId: number;
@@ -41,16 +41,17 @@ export default memo(function WhitelistModal({ orgId, whitelist }: IWhitelistModa
 				draft.steamId = steamId;
 				draft.expires = expiryDate?.toISOString() ?? ""
 			}));
+		} else {
+			// This will be refactored once the user routes and RBAC is introduced
+			createWhitelist({
+				steamId,
+				enabled,
+				expires: expiryDate?.toISOString()
+			});
 		}
 
-		// This will be refactored once the user routes and RBAC is introduced
-		createWhitelist({
-			steamId,
-			enabled,
-			expires: expiryDate?.toISOString()
-		});
-
 		whitelistForm.reset();
+		setExpiryDate(null);
 		close();
 	};
 
@@ -74,23 +75,29 @@ export default memo(function WhitelistModal({ orgId, whitelist }: IWhitelistModa
 						label="Steam ID"
 						key={ whitelistForm.key("steamId") }
 						required
+						mt={ 10 }
 						{ ...whitelistForm.getInputProps("steamId") }
 					/>
 					<DatePickerInput
 						label="Expires"
-						value={ expiryDate }
 						onChange={ setExpiryDate }
-						key={ whitelistForm.key("expires") }
-						{ ...whitelistForm.getInputProps("expires") }
+						mt={ 10 }
+						value={ expiryDate }
+						defaultDate={ new Date() }
 					/>
 					<Button variant="filled" type="submit" mt={ 20 }>
 						Submit
 					</Button>
 				</form>
 			</Modal>
-			<Button onClick={ open } variant="light">
+			<ThemeIcon
+				className="theme-icon-button"
+				onClick={ open }
+				variant="light"
+				ml="auto"
+			>
 				<Icon name={ actionIcon } />
-			</Button>
+			</ThemeIcon>
 		</>
 	);
 });

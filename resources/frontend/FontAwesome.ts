@@ -7,7 +7,7 @@ const icons: string[] = [
 	"faSpinner", "faHouse", "faAward", "faRightFromBracket", "faPlus", "faUser",
 	"faPencil", "faTrash", "faCog", "faBell", "faGauge", "faCircleInfo", "faTicket",
 	"faPersonRunning", "faUsers", "faFolderOpen", "faServer", "faBuilding", "faBoxOpen",
-	"faPlus"
+	"faPlus", "faArrowLeft"
 ];
 
 const brandIcons: string[] = [

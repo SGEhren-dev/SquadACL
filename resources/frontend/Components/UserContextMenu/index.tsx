@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "@/Data/Redux/Store";
 import { Menu, Text, UnstyledButton } from "@mantine/core";
 import { memo } from "react";
 import { useNavigate } from "react-router-dom";
-import Icon from "@/Components/Icon/index";
+import Icon from "@/Components/Icon";
 
 export default memo(function UserContextMenu() {
 	const navigate = useNavigate();

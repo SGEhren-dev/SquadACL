@@ -1,6 +1,6 @@
 import { Group, Stack, Text, ThemeIcon, Title } from "@mantine/core";
 import { memo, ReactNode } from "react";
-import Icon from "@/Components/Icon/index";
+import Icon from "@/Components/Icon";
 import { IWithChildren } from "@/Data/Interfaces/Global";
 
 interface IPageLayoutProps extends IWithChildren {

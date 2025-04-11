@@ -3,14 +3,15 @@ import { selectUser } from "@/Data/Redux/Slices/User";
 import { useAppSelector } from "@/Data/Redux/Store";
 import { Button, Divider, Group, Paper, Stack, Text, Title } from "@mantine/core";
 import { memo } from "react";
-import Icon from "@/Components/Icon/index";
+import Icon from "@/Components/Icon";
 import { useNavigate } from "react-router-dom";
 
 interface IOrganizationCardProps {
 	organization: IOrganization;
+	whitelistCount: number;
 }
 
-export default memo(function OrganizationCard({ organization }: IOrganizationCardProps) {
+export default memo(function OrganizationCard({ organization, whitelistCount }: IOrganizationCardProps) {
 	const navigate = useNavigate();
 	const loggedInUser = useAppSelector(selectUser);
 
@@ -27,7 +28,7 @@ export default memo(function OrganizationCard({ organization }: IOrganizationCar
 				</Group>
 				<Divider />
 				<Group align="center">
-					<Text>0 / { organization.maxSlots }</Text>
+					<Text>{ whitelistCount } / { organization.maxSlots }</Text>
 					<Button variant="light" color="red" ml="auto">
 						<Icon name="trash" />
 					</Button>

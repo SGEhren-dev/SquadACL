@@ -5,7 +5,7 @@
 		"lib": ["DOM"],
 		"jsx": "preserve",
 		"paths": {
-			"@/*": [ "./frontend/*.js", "./frontend/*.jsx", "./frontend/*" ]
+			"@/*": [ "./frontend/*.js", "./frontend/*.jsx", "./frontend/*", "./frontend/*/index.js" ]
 		}
 	}
 }

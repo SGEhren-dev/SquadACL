@@ -1,10 +1,10 @@
 import { memo } from "react";
-import Home from "@/Pages/Home/index";
-import Login from "@/Pages/Login/index";
+import Home from "@/Pages/Home";
+import Login from "@/Pages/Login";
 import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "@/Components/PrivateRoute";
-import Servers from "@/Pages/Servers/index";
-import Organizations from "@/Pages/Organizations/index";
+import Servers from "@/Pages/Servers";
+import Organizations from "@/Pages/Organizations";
 import EditOrganization from "@/Pages/Organizations/EditOrganization";
 
 export default memo(function Router() {

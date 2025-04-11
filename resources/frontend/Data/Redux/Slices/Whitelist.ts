@@ -1,5 +1,5 @@
 import { ICreateWhitelistPayload, IDeleteWhitelistPayload, IUpdateWhitelistPayload, IWhitelist, IWhitelistState } from "@/Data/Interfaces/Whitelist";
-import { DELETE, GET, POST } from "@/Data/Network";
+import { DELETE, GET, PATCH, POST } from "@/Data/Network";
 import { createAppSlice } from "@/Data/Redux/Helpers";
 import { PayloadAction } from "@reduxjs/toolkit";
 
@@ -20,7 +20,7 @@ const createWhitelistAsync = (payload: ICreateWhitelistPayload) => {
 const updateWhitelistAsync = (payload: IUpdateWhitelistPayload) => {
 	const { orgId, ...restProps } = payload;
 
-	return POST<IWhitelist, IWhitelist>(`organization/${ orgId }/whitelists/${ restProps.id }`, restProps);
+	return PATCH<IWhitelist, IWhitelist>(`organization/${ orgId }/whitelists/${ restProps.id }`, restProps);
 };
 
 const deleteWhitelistAsync = (payload: IDeleteWhitelistPayload) => {

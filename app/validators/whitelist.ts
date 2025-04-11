@@ -4,5 +4,6 @@ export const whitelistValidator = vine.compile(
   vine.object({
     steamId: vine.string().fixedLength(17),
     enabled: vine.boolean(),
+    expires: vine.date({ formats: { utc: true } }).optional(),
   })
 )

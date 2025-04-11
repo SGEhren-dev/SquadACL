@@ -39,14 +39,14 @@ export default memo(function OrganizationModal({ organization }: IOrganizationMo
 				draft.name = name;
 				draft.maxSlots = +maxSlots;
 			}))
+		} else {
+			// This will be refactored once the user routes and RBAC is introduced
+			createOrganization({
+				name,
+				owner: loggedInUser?.id,
+				maxSlots
+			});
 		}
-
-		// This will be refactored once the user routes and RBAC is introduced
-		createOrganization({
-			name,
-			owner: loggedInUser?.id,
-			maxSlots
-		});
 
 		organizationForm.reset();
 		close();

@@ -9,6 +9,7 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+const RemoteAdminsController = () => import('#controllers/remote_admins_controller')
 const WhitelistsController = () => import('#controllers/whitelists_controller')
 const OrganizationsController = () => import('#controllers/organizations_controller')
 const ServerGroupsController = () => import('#controllers/server_groups_controller')
@@ -34,6 +35,16 @@ router
   })
   .prefix('api')
   .middleware(middleware.auth({ guards: ['api'] }))
+
+router
+  .group(function () {
+    router
+      .get('whitelist', [RemoteAdminsController, 'index'])
+      .as('remote-admin')
+      .prefix('/organizations/:id')
+  })
+  .prefix('public')
+  .as('public.')
 
 router
   .group(function () {

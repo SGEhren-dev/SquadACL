@@ -3,6 +3,7 @@ import Whitelist from '#models/whitelist'
 import WhitelistResource from '#resource/whitelist_resource'
 import { whitelistValidator } from '#validators/whitelist'
 import type { HttpContext } from '@adonisjs/core/http'
+import { DateTime } from 'luxon'
 
 export default class WhitelistsController {
   /**
@@ -27,7 +28,10 @@ export default class WhitelistsController {
     const { orgId } = params
     const foundOrganization = await Organization.findOrFail(orgId)
 
-    const newWhitelist = await foundOrganization.related('whitelist').create(payload)
+    const newWhitelist = await foundOrganization.related('whitelist').create({
+      ...payload,
+      expires: payload.expires ? DateTime.fromJSDate(payload.expires) : undefined,
+    })
 
     return new WhitelistResource(newWhitelist).make()
   }
@@ -50,7 +54,12 @@ export default class WhitelistsController {
     const { orgId, id } = params
     const foundWhitelist = await Whitelist.findByOrFail({ id, organization_id: orgId })
 
-    await foundWhitelist.merge(payload).save()
+    await foundWhitelist
+      .merge({
+        ...payload,
+        expires: payload.expires ? DateTime.fromJSDate(payload.expires) : undefined,
+      })
+      .save()
 
     return new WhitelistResource(foundWhitelist).make()
   }

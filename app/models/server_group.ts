@@ -1,5 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
+import Server from '#models/server'
+import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 
 export default class ServerGroup extends BaseModel {
   @column({ isPrimary: true })
@@ -10,6 +12,12 @@ export default class ServerGroup extends BaseModel {
 
   @column()
   declare permissions: string
+
+  @column()
+  declare serverId: number
+
+  @belongsTo(() => Server)
+  declare server: BelongsTo<typeof Server>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

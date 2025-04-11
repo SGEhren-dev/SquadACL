@@ -2,9 +2,9 @@ import { memo } from "react";
 import "@/Pages/Home/Home.less";
 import { Outlet, useMatch, useNavigate } from "react-router-dom";
 import { Category } from "@/Data/Interfaces/Navigation";
-import Icon, { IconWeight } from "@/Components/Icon/index";
+import Icon, { IconWeight } from "@/Components/Icon";
 import { AppShell, Flex, Group, Image, Text, Tooltip, UnstyledButton } from "@mantine/core";
-import UserContextMenu from "@/Components/UserContextMenu/index";
+import UserContextMenu from "@/Components/UserContextMenu";
 import AclLogo from "../../Images/squadacl-logo.png";
 
 interface ICategoryItem {
